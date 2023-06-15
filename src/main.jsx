@@ -10,7 +10,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
         <StrictMode>
         <App />
-        {console.log("storedetails",store)}
         </StrictMode>
     </Provider>
 

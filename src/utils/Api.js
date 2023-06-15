@@ -8,11 +8,9 @@ import { baseUrl } from '../Constant/Constant'
     
       data = await axios.get(`${baseUrl}${param}?api_key=${API_KEY}`)
       .then((res)=>{            
-        console.log("response",res.data.results);
       return res
       })
     }catch(error){
-      console.log("error",error);
       return error
     }
     return data;

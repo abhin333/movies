@@ -21,8 +21,6 @@ const useFetch = (url) => {
         setError("somthing went wrong.....");
       });
   }, [url]);
-  console.log("resltrrrr",data);
-
   return {data, loading, error};
 };
 

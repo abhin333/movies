@@ -3,27 +3,23 @@ import "./HeroBanner.scss";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../Component/Hook/useFetch";
 import { useSelector } from "react-redux";
-import contentWrapper from "../../../Component/contentWrapper/contentWrapper";
+import ContentWrapper from "../../../Component/contentWrapper/ContentWrapper";
 import Img from "../../../Component/LazyLoading/Img";
 const HeroBanner = () => {
   const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const { url } = useSelector((state) => state.home);
- console.log("url",url);
   const navigate = useNavigate();
 
   const { data, loading } = useFetch("/movie/upcoming");
   useEffect(() => {
     const bg =url.backdrops + data?.data?.results?.[Math.floor(Math.random()*20)]?.backdrop_path;
     setBackground(bg);
-    console.log("back",background);
-    console.log("data...",data);
   }, [data]);
 
 
   
   useEffect(()=>{  
-    console.log("papapapapap");
   },[data]);
 
 
@@ -41,7 +37,7 @@ const HeroBanner = () => {
       </div>
       }
       <div className="opacity-layer"></div>
-      <contentWrapper>
+      <ContentWrapper>
       <div className="wrapper">
         <div className="heroBannerContent">
           <span className="title">Welcome.</span>
@@ -59,7 +55,7 @@ const HeroBanner = () => {
               </div>
           </div>
       </div>
-      </contentWrapper>
+      </ContentWrapper>
       
     </div>
   );

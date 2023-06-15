@@ -4,7 +4,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
-import contentWrapper from "../contentWrapper/contentWrapper";
+import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
 
 
@@ -16,14 +16,12 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("mobile menu",mobileMenu);
 
   useEffect(()=>{
     window.scrollTo(0,0)
   },[location])
 
   const controlNavbar=()=>{
-    console.log("sss",window.scrollY);
     if(window.scrollY > 200){
       if(window.scrollY > lastScrollY && !mobileMenu){
         setShow("hide")
@@ -91,7 +89,7 @@ const navigationHandler =(type)=>{
         </div>
       {showSearch &&
         <div className="searchBar">
-    <contentWrapper>
+    <ContentWrapper>
         <div className="searchInput">
             <input
               type="text"
@@ -101,7 +99,7 @@ const navigationHandler =(type)=>{
               />
            <VscChromeClose onClick={()=>setShowSearch(false)}/>
               </div>
-    </contentWrapper>
+    </ContentWrapper>
         </div>
       } 
       </header>

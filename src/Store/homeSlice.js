@@ -8,18 +8,16 @@ export const homeSlice = createSlice({
   name: 'home',
   initialState:{
     url:{},
-    generes:{}
+    genres:{}
   },
   reducers: {
     getApiConfiguration:(state,action)=>{
       state.url=action.payload;
     },
-    getGeners:(state,action)=>{
-          state.generes=action.payload;
+    getGenres: (state, action) => {
+      state.genres = action.payload;
     }
   },
-  
 })
- console.log("home ",homeSlice);
-export const {getApiConfiguration,getGeners  } = homeSlice.actions
+export const {getApiConfiguration,getGenres: getGenres  } = homeSlice.actions
 export default homeSlice.reducer
