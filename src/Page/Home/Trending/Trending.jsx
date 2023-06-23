@@ -7,10 +7,12 @@ import Carousel from "../../../Component/carousel/Carousel";
 const Trending = () => {
   const [endpoint, setEndpoint] = useState("day");
   const { data, loading } = useFetch(`/trending/all/${endpoint}`);
+
   const onTabChange = (tabs) => {
     setEndpoint(tabs === "Day" ? "day" : "week");
   };
-  console.log("data11",data?.data.results);
+  console.log("data11", data?.data.results);
+
   return (
     <>
       <div className="carouselSection">
@@ -18,7 +20,7 @@ const Trending = () => {
           <span className="carouselTitle">Trending</span>
           <SwitchTabs data={["Day", "Week"]} onTabChange={onTabChange} />
         </ContentWrapper>
-        <Carousel data={data?.data.results} loading={loading} />
+        <Carousel data={data?.data.results} loading={loading}/>
       </div>
     </>
   );

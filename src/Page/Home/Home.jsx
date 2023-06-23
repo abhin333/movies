@@ -6,16 +6,16 @@ import TopRated from '../TopRated/TopRated';
 import Latest from '../Latest/Latest'
 import "./Home.scss"
 function Home() {
+  
   return (
     <div>
       <HeroBanner />
-      <Trending />
+      <Trending/>  
       <Latest/>
       <Popular />
       <TopRated/>
 
 
-        <div ></div>
     </div>
   )
 }

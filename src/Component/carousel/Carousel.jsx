@@ -7,36 +7,41 @@ import dayjs from "dayjs";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Img from "../LazyLoading/Img";
 import PosterFallback from "../../assets/no-poster.png";
-import CircleRating from "../CircleRating/CircleRating"
+import CircleRating from "../CircleRating/CircleRating";
 import "./Carousel.scss";
 import Genres from "../Genres/Genres";
 
-const Carousel = ({ data, loading ,endpoint}) => {
+const Carousel = ({ data, loading, endpoint, title }) => {
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
   const skItem = () => {
     return (
       <div className="skeletonItem">
-        <div className="posterBlock skelton"></div>
+        <div className="posterBlock skeleton"></div>
         <div className="textBlock">
-          <div className="title skelton"></div>
-          <div className="date skelton"></div>
+          <div className="title skeleton"></div>
+          <div className="date skeleton"></div>
         </div>
       </div>
-    )
-  }
+    );
+  };
   const navigation = (dir) => {
     const container = carouselContainer.current;
-    const scrollAmount = dir === "left" ? container.scrollLeft - (container.offsetWidth + 20): container.scrollLeft + (container.offsetWidth + 20)
+    const scrollAmount =
+      dir === "left"
+        ? container.scrollLeft - (container.offsetWidth + 20)
+        : container.scrollLeft + (container.offsetWidth + 20);
     container.scrollTo({
       left: scrollAmount,
-      behavior:'smooth',
-  })
-  }
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="carousel">
       <ContentWrapper>
+      {title && <div className="carouselTitle">{title}</div>}
+
         <BsFillCaretLeftFill
           className="carouselLeftNav arrow"
           onClick={() => navigation("left")}
@@ -46,25 +51,28 @@ const Carousel = ({ data, loading ,endpoint}) => {
           onClick={() => navigation("right")}
         />
         {!loading ? (
-
-          <div className="carouselItems" ref={carouselContainer}>
-                      {data?.map((item) => {
+          <div className="carouselItems" ref={carouselContainer} >
+            {data?.map((item) => {
               const posterUrl = item.poster_path
                 ? url.poster + item.poster_path
                 : PosterFallback;
-              return (
-                <div key={item.id} className="carouselItem" onClick={()=>navigate(`/${item.media_type}/${item.id}`)}>
+                return (
+                  <div
+                  key={item.id}
+                  className="carouselItem"
+                  onClick={() => navigate(`/${item.media_type || endpoint}/${
+                    item.id
+                }`)}
+                >
                   <div className="posterBlock">
                     <Img src={posterUrl} />
-                    <CircleRating rating={item.vote_average.toFixed(1)}/>
-                    <Genres data={item.genre_ids.slice(0,2) } />
+                    <CircleRating rating={item.vote_average.toFixed(1)} />
+                    <Genres data={item.genre_ids.slice(0, 2)} />
                   </div>
                   <div className="textBlock">
-                    <span className="title">
-                      {item.title || item.name }
-                    </span>
+                    <span className="title">{item.title || item.name}</span>
                     <span className="date">
-                      {dayjs(item.release_Date).format("MMM D, YYYY") }
+                      {dayjs(item.release_Date).format("MMM D, YYYY")}
                     </span>
                   </div>
                 </div>
@@ -72,18 +80,14 @@ const Carousel = ({ data, loading ,endpoint}) => {
             })}
           </div>
         ) : (
-            <div className="loadingSkeleton">
-              {skItem()}
-              {skItem()}
-              {skItem()}
-              {skItem()}
-              {skItem()}
-
-              
-
+          <div className="loadingSkeleton">
+            {skItem()}
+            {skItem()}
+            {skItem()}
+            {skItem()}
+            {skItem()}
           </div>
         )}
-
       </ContentWrapper>
     </div>
   );
