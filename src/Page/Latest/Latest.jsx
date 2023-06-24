@@ -10,7 +10,6 @@ const Latest = () => {
     const [endpoint, setEndpoint] = useState("movie");
     
     const { data, loading } = useFetch(`/${endpoint}/upcoming`);
-    console.log("dtatacomming",data?.data.results);
 
     const onTabChange = (tab) => {
         setEndpoint(tab === "Movies" ? "movie" : "movie");

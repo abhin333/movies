@@ -13,50 +13,52 @@ const HeroBanner = () => {
 
   const { data, loading } = useFetch("/movie/upcoming");
   useEffect(() => {
-    const bg =url.backdrops + data?.data?.results?.[Math.floor(Math.random()*20)]?.backdrop_path;
+    const bg =
+      url.backdrops +
+      data?.data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
     setBackground(bg);
   }, [data]);
 
-
-  
-  useEffect(()=>{  
-  },[data]);
-
+  useEffect(() => {}, [data]);
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
     }
   };
+  const searchHandler = (event) => {
+    event.preventDefault();
+    navigate(`/search/${query}`);
+  };
   return (
     <div className="heroBanner">
-      {!loading &&
+      {!loading && (
         <div className="backdrop_img">
-       <Img src={background}/>
-
-      </div>
-      }
+          <Img src={background} />
+        </div>
+      )}
       <div className="opacity-layer"></div>
       <ContentWrapper>
-      <div className="wrapper">
-        <div className="heroBannerContent">
-          <span className="title">Welcome.</span>
-          <span className="subtitle">
-            Millions of Movies,Tv shows and people to discover. Explore now.
-          </span>
-          <div className="searchInput">
-            <input
-              type="text"
-              placeholder="Search for movies and tv shows"
-              onKeyUp={searchQueryHandler}
-              onChange={(e) => setQuery(e.target.value)}
-              />
-            <button>Search</button>
+        <div className="wrapper">
+          <div className="heroBannerContent">
+            <span className="title">Welcome.</span>
+            <span className="subtitle">
+              Millions of Movies,Tv shows and people to discover. Explore now.
+            </span>
+            <form onSubmit={searchHandler}>
+              <div className="searchInput">
+                <input
+                  type="text"
+                  placeholder="Search for movies and tv shows"
+                  onKeyUp={searchQueryHandler}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <button type="submit">Search</button>
               </div>
+            </form>
           </div>
-      </div>
+        </div>
       </ContentWrapper>
-      
     </div>
   );
 };

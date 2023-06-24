@@ -8,7 +8,6 @@ import Img from "../../../Component/LazyLoading/Img";
 import avatar from "../../../assets/avatar.png";
 
 const Cast = ({ data, loading }) => {
-    console.log("data",data,loading);
     const { url } = useSelector((state) => state.home);
     const skeleton = () => {
         return (

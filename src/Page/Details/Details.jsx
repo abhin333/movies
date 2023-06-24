@@ -6,6 +6,7 @@ import DetailsBanner from "./DetailsBanner/DetailsBanner";
 import Cast from "./Cast/Cast";
 import VideosSection from "./DetailsBanner/VideoSection/VideoSection";
 import Similar from "./DetailsBanner/Similar/Similar";
+import Recommendation from "./Recomendation/Recomentation";
 const Details = () => {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}/videos`);
@@ -17,8 +18,9 @@ const Details = () => {
       <Cast data={credits?.data?.cast} loading={creditsLoading} />
       <VideosSection data={data} loading={loading} />
       <Similar mediaType={mediaType} id={id} />
-    </div>
-  );
+      <Recommendation mediaType={mediaType} id={id}/>
+      </div>
+      );
 };
 
 export default Details;

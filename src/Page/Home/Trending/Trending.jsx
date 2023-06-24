@@ -11,7 +11,6 @@ const Trending = () => {
   const onTabChange = (tabs) => {
     setEndpoint(tabs === "Day" ? "day" : "week");
   };
-  console.log("data11", data?.data.results);
 
   return (
     <>

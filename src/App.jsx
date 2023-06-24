@@ -9,10 +9,10 @@ import Home from "./Page/Home/Home";
 import Header from "./Component/Header/Header";
 import Fotter from "./Component/Footer/Fotter";
 import PageNotFound from "./Page/404/PageNotFound";
-import searchResult from "./Page/SearchResult/searchResult";
 import Explore from "./Page/Explore/Explore";
 import Details from "./Page/Details/Details";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SearchResult from "./Page/SearchResult/SearchResult";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const App = () => {
         profile: res.data.images.secure_base_url + "original",
       };
       dispatch(getApiConfiguration(url));
-      // dispatch(getGeners(res));
+      // dispatch(getGenres(res));
     });
   };
 
@@ -43,12 +43,10 @@ const App = () => {
     });
 
     const data = await Promise.all(promises);
-    console.log("data", data[0].data.genres, data[1].data.genres);
     let dataa = [data[0].data, data[1].data];
     dataa.map(({ genres }) => {
-      console.log("gg", genres);
       return genres.map((item) => (allGenres[item.id] = item));
-    }); // geners are not getting write way !!!!!!
+    });
     dispatch(getGenres(allGenres));
   };
   return (
@@ -56,21 +54,9 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-      </Routes>
-      <Routes>
         <Route path="/:mediaType/:id" element={<Details />} />
-      </Routes>
-      <Routes>
-        <Route path="/search/:query" element={<searchResult />} />
-      </Routes>
-      <Routes>
-        <Route
-          path="/explore/
-        :mediaType"
-          element={<Explore />}
-        />
-      </Routes>
-      <Routes>
+        <Route path="/search/:query" element={<SearchResult/>} />
+        <Route path="/explore/:mediaType" element={<Explore />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Fotter />
